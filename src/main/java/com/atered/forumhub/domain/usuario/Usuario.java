@@ -1,6 +1,7 @@
 package com.atered.forumhub.domain.usuario;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 
 @Table(name = "usuarios")
@@ -22,5 +23,14 @@ public class Usuario {
         this.nome = dados.nome();
         this.email = dados.email();
         this.senha = dados.senha();
+    }
+
+    public void atualizarInformacoes(@Valid DadosAtualizarUsario dados) {
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if (dados.senha() != null) {
+            this.senha = dados.senha();
+        }
     }
 }

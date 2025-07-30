@@ -3,6 +3,7 @@ package com.atered.forumhub.domain.topico;
 import com.atered.forumhub.domain.curso.Curso;
 import com.atered.forumhub.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -40,6 +41,18 @@ public class Topico {
         this.usuario = usuario;
         this.data = LocalDateTime.now();
         this.estado = Estado.NAO_RESPONDIDO;
+    }
+
+    public void atualizarInformacoes(@Valid DadosAtualizarTopico dados) {
+        if (dados.titulo() != null) {
+            this.titulo = dados.titulo();
+        }
+        if (dados.mensagem() != null) {
+            this.mensagem = dados.mensagem();
+        }
+        if (dados.estado() != null) {
+            this.estado = dados.estado();
+        }
     }
 
 }

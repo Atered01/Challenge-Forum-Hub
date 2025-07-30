@@ -22,4 +22,10 @@ public class Curso {
         this.nome = dados.nome();
         this.categoria = dados.categoria();
     }
+
+    public void atualizarCurso(DadosAtualizarCurso dados){
+        this.nome = dados.nome();
+        this.categoria = dados.categoria();
+    }
+
 }

@@ -5,5 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CursoRepository extends JpaRepository<Curso, Long> {
-    Boolean existsByNome(@NotBlank(message = "Nome do curso é obrigatório") String nome);
+    boolean existsByNome(@NotBlank(message = "Nome do curso é obrigatório") String nome);
+
+    boolean existsByNomeAndIdNot(String nome, Long id);
 }
