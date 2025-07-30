@@ -2,6 +2,8 @@ package com.atered.forumhub.domain.usuario;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,6 +31,12 @@ public class Usuario implements UserDetails {
         this.nome = dados.nome();
         this.email = dados.email();
         this.senha = dados.senha();
+    }
+
+    public Usuario(String nome, String email, String senhaCodificada) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senhaCodificada;
     }
 
     public void atualizarInformacoes(@Valid DadosAtualizarUsario dados) {

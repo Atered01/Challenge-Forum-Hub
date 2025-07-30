@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -19,18 +20,21 @@ public class UsuariosController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@Valid @RequestBody DadosCadastroUsuario dados, UriComponentsBuilder uriBuilder) {
         if (usuarioRepository.existsByEmail(dados.email())){
             throw new IllegalArgumentException("Email ja cadastrado");
         }
-        var usuario = new Usuario(dados);
+        var senhaCodificada = passwordEncoder.encode(dados.senha());
+        var usuario = new Usuario(dados.nome(), dados.email(), senhaCodificada);
         usuarioRepository.save(usuario);
         var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoUsuario(usuario));
     }
-
     @GetMapping
     public ResponseEntity<Page<DadosListagemUsuario>> listarUsuarios(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable) {
         var page = usuarioRepository.findAll(pageable).map(DadosListagemUsuario::new);
