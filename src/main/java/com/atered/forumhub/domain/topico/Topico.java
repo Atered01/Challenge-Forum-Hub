@@ -21,6 +21,7 @@ public class Topico {
     private String titulo;
     private String mensagem;
     private LocalDateTime data;
+
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
@@ -31,5 +32,14 @@ public class Topico {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
     private Usuario usuario;
+
+    public Topico(DadosCadastroTopico dados, Usuario usuario, Curso curso) {
+        this.titulo = dados.titulo();
+        this.mensagem = dados.mensagem();
+        this.curso = curso;
+        this.usuario = usuario;
+        this.data = LocalDateTime.now();
+        this.estado = Estado.NAO_RESPONDIDO;
+    }
 
 }

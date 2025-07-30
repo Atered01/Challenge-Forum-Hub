@@ -3,10 +3,7 @@ package com.atered.forumhub.domain.topico;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDateTime;
-
 public record DadosCadastroTopico(@NotBlank(message = "Titulo é obrigatório")String titulo,
                                   @NotBlank(message = "Mensagem é obrigatória") String mensagem,
-                                  @NotNull LocalDateTime data,
-                                  Estado estado) {
-}
+                                  @NotNull(message = "O ID do curso é obrigatório") Long cursoId,
+                                  @NotNull(message = "O ID do autor é obrigatório") Long autorId){}
