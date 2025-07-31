@@ -1,4 +1,3 @@
-````markdown
 # Fórum Hub - Challenge Alura & Oracle Next Education
 
 ## 📖 Sobre o Projeto
@@ -124,4 +123,3 @@ Fernando Ramalho
 ## 🙏 Agradecimentos
 
 Este projeto foi desenvolvido como parte do programa de formação Oracle Next Education (ONE), uma iniciativa da Oracle em parceria com a Alura.
-````
